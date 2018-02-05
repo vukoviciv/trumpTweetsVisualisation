@@ -1,5 +1,5 @@
 <template>
-<div class="question-wrapper">
+  <div class="question-wrapper">
     <div class="question-container">
       <row
         :title="firstRow.title"
@@ -14,8 +14,7 @@
       >
       </row>
     </div>
-    </div>
-
+  </div>
 </template>
 
 <script>
@@ -43,15 +42,15 @@ export default {
 </script>
 
 <style lang="scss">
-.question-wrapper {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.question-container {
-  max-width: 100em;
-  margin: 0 auto;
-  text-transform: capitalize;
-}
+  .question-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .question-container {
+    max-width: 100em;
+    margin: 0 auto;
+    text-transform: capitalize;
+  }
 </style>

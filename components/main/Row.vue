@@ -48,8 +48,6 @@ export default {
   }
 
   a {
-    // display: flex;
-    // align-items: center;
     background-color: black;
     color: white;
     text-decoration: none;
