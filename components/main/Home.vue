@@ -1,23 +1,24 @@
 <template>
   <div class="question-container">
     <row
-      v-bind:title="firstRow.title"
-      v-bind:linkText="firstRow.linkText"
-      v-bind:routeName="firstRow.routeName"
+      :title="firstRow.title"
+      :linkText="firstRow.linkText"
+      :routeName="firstRow.routeName"
     >
     </row>
     <row
-      v-bind:title="secondRow.title"
-      v-bind:linkText="secondRow.linkText"
-      v-bind:routeName="secondRow.routeName"
+      :title="secondRow.title"
+      :linkText="secondRow.linkText"
+      :routeName="secondRow.routeName"
     >
     </row>
   </div>
 </template>
 
 <script>
-import { routeNames } from '../../router'
-import Row from './Row.vue'
+// TODO: find out how to import from root folder
+import { routeNames } from '../../router';
+import Row from './Row.vue';
 
 export default {
   data: function() {
@@ -32,8 +33,15 @@ export default {
         linkText: 'watch',
         routeName: routeNames.GRAPHS
       }
-    }
+    };
   },
-  components: { Row },
+  components: { Row }
 };
 </script>
+
+<style lang="scss">
+.question-container {
+  text-transform: capitalize;
+  font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+</style>

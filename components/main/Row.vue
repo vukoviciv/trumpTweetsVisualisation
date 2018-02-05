@@ -27,3 +27,38 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.row {
+  margin: 2em;
+
+  .large-text-container {
+    width: 100%;
+    font-size: 5em;
+  }
+
+  .large-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    text-transform: uppercase;
+    font-size: 14em;
+    text-align: right;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+      background-color: white;
+      color: black;
+    }
+  }
+}
+</style>
