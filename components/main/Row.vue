@@ -30,26 +30,26 @@ export default {
 
 <style lang="scss">
 .row {
-  margin: 2em;
+  margin: 3em 0;
+  text-align: center;
 
   .large-text-container {
     width: 100%;
-    font-size: 5em;
+    font-size: 3em;
   }
 
   .large-button-container {
     width: 100%;
     display: flex;
     justify-content: center;
-
     text-transform: uppercase;
-    font-size: 14em;
+    font-size: 9em;
     text-align: right;
   }
 
   a {
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
     background-color: black;
     color: white;
     text-decoration: none;
