@@ -1,22 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
-// import cart from './modules/cart'
-// import products from './modules/products'
-// import createLogger from '../../../src/plugins/logger'
+import req from '../api/request'
+import tweets from './modules/tweets'
 
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
+  actions,
   state: {
     count: 0,
   },
-  mutations: {
-    increment: state => state.count++,
-    decrement: state => state.count--
-  }
-})
-
-export default store;
+  modules: {
+    tweets,
+  },
+});

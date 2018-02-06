@@ -2,27 +2,22 @@
   <div> Ovo je graphs ruta
 
     {{ count }}
-    <button @click="increment"> + </button>
-    <button @click="decrement"> - </button>
+    <button @click="incrementCount(2)"> + </button>
 
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  computed: {
-    count() {
-      return this.$store.state.count
-    }
-  },
+  computed: mapGetters({
+    count: 'count',
+  }),
+
   // actions
-  methods: {
-    increment () {
-      this.$store.commit('increment')
-    },
-    decrement () {
-      this.$store.commit('decrement')
-    }
-  }
+  methods: mapActions([
+    'incrementCount'
+  ])
 }
 </script>

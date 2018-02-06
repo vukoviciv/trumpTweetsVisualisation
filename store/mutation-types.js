@@ -1,0 +1,2 @@
+export const INCREMENT_COUNT = 'INCREMENT_COUNT'
+export const GET_TWEET_PAGE = 'GET_TWEET_PAGE'

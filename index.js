@@ -8,8 +8,8 @@ import App from './components/App'
 Vue.use(Vuex)
 
 new Vue({
-  router,
-  store,
   el: '#app',
+  store,
+  router,
   render: h => h(App)
 });
