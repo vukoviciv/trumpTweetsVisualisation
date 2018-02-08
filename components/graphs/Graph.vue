@@ -3,7 +3,7 @@
 
     {{ count }}
     <button @click="incrementCount(2)"> + </button>
-
+    <br>
   </div>
 </template>
 
@@ -17,7 +17,11 @@ export default {
 
   // actions
   methods: mapActions([
-    'incrementCount'
-  ])
+    'incrementCount',
+  ]),
+
+  created() {
+    return this.$store.dispatch('appendTweetsPage')
+  }
 }
 </script>
