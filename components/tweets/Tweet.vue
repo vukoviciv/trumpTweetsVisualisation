@@ -14,14 +14,12 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-
 export default {
   props: {
     tweet: {
       type: Object,
       required: true,
     }
-  },
+  }
 };
 </script>

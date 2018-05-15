@@ -5,7 +5,6 @@ import { type } from 'os';
 // initial state
 const state = {
   all: [],
-  count: 0,
   lastPageNumber: 1, // will be updated with each api request
 }
 
@@ -15,13 +14,12 @@ const getters = {
   count: state => state.count
 }
 
+// actions
 const actions = {
   appendTweetsPage ({ commit }) {
     const currentPageNumber = state.lastPageNumber;
-    console.log('aa', currentPageNumber)
     req.get(`/api/tweets/page/${currentPageNumber}`)
       .then(response => {
-        console.log(response)
         const { tweets } = response.data
         commit(types.APPEND_TWEETS_PAGE, { tweets })
         commit(types.INCREMENT_PAGE_COUNTER)
@@ -32,9 +30,6 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.INCREMENT_COUNT] (state, { number }) {
-    state.count += number
-  },
   [types.APPEND_TWEETS_PAGE] (state, { tweets }) {
     state.all = state.all.concat(tweets)
   },

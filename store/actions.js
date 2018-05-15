@@ -4,13 +4,13 @@ import * as types from '../store/mutation-types'
 //   commit(types.GET_TWEET_PAGE)
 // }
 
-// export const appendTweetsPage = ({ commit }) => {
-//   console.log('in action')
+export const appendTweetsPage = ({ commit }) => {
+  // console.log('in action')
 
-//   commit(types.APPEND_TWEETS_PAGE)
-// }
+  // commit(types.APPEND_TWEETS_PAGE)
+}
 
 export const incrementCount = ({ commit }, number) => {
-  console.log(number)
-  commit(types.INCREMENT_COUNT, { number })
+  // console.log('ddddddddd ihdfuihguhruig iuh uidhusihfui hifhdus ho')
+  // commit(types.INCREMENT_COUNT, { number })
 }
