@@ -20,6 +20,7 @@
 <script>
 // TODO: find out how to import from root folder
 import { routeNames } from '../../router';
+import Row from './Row.vue'
 
 export default {
   data: function() {
@@ -35,7 +36,9 @@ export default {
         routeName: routeNames.GRAPHS
       }
     };
-  }
+  },
+
+  components: { Row }
 };
 </script>
 
