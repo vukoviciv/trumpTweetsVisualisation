@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 export default {
   props: {
     profilePictureUrl: {
@@ -35,9 +33,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  $max-width: 64rem;
-  $background-color: #ffffff;
+<style lang='scss' scoped>
+  @import 'assets/stylesheets/variables.scss';
 
   @mixin transition-ease-out () {
     -webkit-transition: all .2s ease-out;

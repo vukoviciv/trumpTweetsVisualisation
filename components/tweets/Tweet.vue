@@ -24,7 +24,7 @@ export default {
 
   computed: {
     createdAt() {
-      let parsedTime = new Date(Date.parse(this.tweet.created_at));
+      const parsedTime = new Date(Date.parse(this.tweet.created_at));
       return `${parsedTime.toLocaleTimeString()}, ${parsedTime.toDateString()}`;
     }
   }

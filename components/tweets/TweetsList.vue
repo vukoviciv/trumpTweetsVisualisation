@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
+  import { mapActions } from 'vuex';
   import Tweet from './Tweet.vue';
 
   export default {
@@ -23,28 +23,20 @@
         required: true
       }
     },
-    // },
-    // computed: mapGetters({
-    //   tweets: 'allTweets'
-    // }),
 
-    methods: mapActions([
-      'appendTweetsPage'
-    ]),
-
-    // mounted() {
-    //   this.appendTweetsPage();
-    // },
+    methods: {
+      ...mapActions([
+        'appendTweetsPage'
+      ])
+    },
 
     components: { Tweet },
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
   @import 'assets/stylesheets/breakPoints.scss';
   @import 'assets/stylesheets/variables.scss';
-
-  $max-width: 64rem;
 
   @mixin inset-top-shadow() {
     -webkit-box-shadow: inset 0px 3px 5px 0px rgba(0,0,0,0.15);
