@@ -1,14 +1,16 @@
 <template>
-  <li class="tweet">
-    <span class="text-wrapper">
-      <span class="text">{{ tweet.full_text }}</span>
+  <li
+    class='tweet'
+    :class='{ loading: loading }'>
+    <span class='text-wrapper'>
+      <span class='text'>{{ tweet.full_text }}</span>
     </span>
-    <span class="time-count-wrapper">
-      <span class="favorite-count">
-        <i class="fa fa-heart-o"></i>
+    <span class='time-count-wrapper'>
+      <span class='favorite-count'>
+        <i class='fa fa-heart-o'></i>
         <span>{{ tweet.favorite_count }}</span>
       </span>
-      <span class="time">{{ createdAt }}</span>
+      <span class='time'>{{ createdAt }}</span>
     </span>
   </li>
 </template>
@@ -19,6 +21,9 @@ export default {
     tweet: {
       type: Object,
       required: true
+    },
+    loading: {
+      type: Boolean
     }
   },
 
@@ -31,7 +36,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 @import 'assets/stylesheets/variables.scss';
 @import 'assets/stylesheets/breakPoints.scss';
 

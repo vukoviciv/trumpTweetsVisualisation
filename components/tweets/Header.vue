@@ -1,33 +1,37 @@
 <template>
-  <div class='header'>
+  <div
+    class='header'
+    :class='{loading: loading}'>
+
     <div class='header-background'>
       <img :src='bannerUrl'>
     </div>
 
     <div class='header-profile-picture'>
       <div class='profile-picture-container'>
-        <img :src='profilePictureUrl'>
+        <div
+          v-if='loading'
+          class='empty-image loading'>
+        </div>
+        <img v-else :src='profilePictureUrl'/>
       </div>
+
     </div>
 
-    <div class='button-container'>
-      <div class='twitter-button'>
-        <a href='/tweets/update'>Get new tweets</a>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  props: {
-    profilePictureUrl: {
-      type: String,
-      required: true
-    },
-    bannerUrl: {
-      type: String,
-      required: true
+  computed: {
+     ...mapGetters([
+      'profilePictureUrl',
+      'bannerUrl',
+    ]),
+    loading() {
+      return !(this.profilePictureUrl && this.bannerUrl)
     }
   }
 }
@@ -48,6 +52,7 @@ export default {
     position: relative;
     max-width: $max-width;
     width: 100%;
+    min-height: 18rem;
     margin: 0 auto;
 
     .header-background img {
@@ -72,7 +77,7 @@ export default {
 
       @include transition-ease-out();
 
-      img {
+      img, .empty-image {
         width: 100%;
         height: 100%;
         border-radius: 50%;

@@ -22,8 +22,8 @@ const routes = {
 const state = {
   tweets: [],
   lastPageNumber: 1, // will be updated with each api request
-  profilePictureUrl: '',
-  bannerUrl: ''
+  profilePictureUrl: undefined,
+  bannerUrl: undefined
 }
 
 // getters
@@ -50,7 +50,6 @@ const actions = {
     req.get(`${routes.fetchProfile}`)
       .then(response => {
         const { imageUrl, bannerUrl } = response.data
-        console.log('image, bannerls', imageUrl, bannerUrl)
         commit(types.UPDATE_PROFILE, { imageUrl, bannerUrl })
       })
       .catch(err => console.log('boom', err))

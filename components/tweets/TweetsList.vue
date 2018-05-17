@@ -1,6 +1,7 @@
 <template>
   <div class='tweets-container'>
-    <ol id='tweet-items-container'>
+    <div id='infinity' v-if='loading'></div>
+    <ol v-else id='tweet-items-container'>
       <tweet
         v-for='tweet in tweets'
         :key='tweet.id'
@@ -13,28 +14,26 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
   import Tweet from './Tweet.vue';
 
   export default {
-    props: {
-      tweets: {
-        type: Array,
-        required: true
+    computed: {
+      ...mapGetters(['tweets']),
+      loading() {
+        return this.tweets.length === 0
       }
     },
 
     methods: {
-      ...mapActions([
-        'appendTweetsPage'
-      ])
+      ...mapActions(['appendTweetsPage'])
     },
 
     components: { Tweet },
   };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
   @import 'assets/stylesheets/breakPoints.scss';
   @import 'assets/stylesheets/variables.scss';
 
@@ -105,5 +104,44 @@
     #load-more {
       display: none;
     }
+  }
+
+  // Infinity loader
+  #infinity {
+    position: relative;
+    width: 212px;
+    height: 100px;
+    margin: 0 auto;
+    @include transition-ease-out();
+  }
+
+  #infinity:before,
+  #infinity:after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    border: 20px solid #f0f0f0;
+    -moz-border-radius: 50px 50px 0 50px;
+        border-radius: 50px 50px 0 50px;
+    -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+  }
+
+  #infinity:after {
+    left: auto;
+    right: 0;
+    -moz-border-radius: 50px 50px 50px 0;
+        border-radius: 50px 50px 50px 0;
+    -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+            transform: rotate(45deg);
   }
 </style>
