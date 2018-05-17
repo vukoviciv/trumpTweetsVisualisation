@@ -28,9 +28,9 @@
     //   tweets: 'allTweets'
     // }),
 
-    // methods: mapActions([
-    //   'appendTweetsPage'
-    // ]),
+    methods: mapActions([
+      'appendTweetsPage'
+    ]),
 
     // mounted() {
     //   this.appendTweetsPage();

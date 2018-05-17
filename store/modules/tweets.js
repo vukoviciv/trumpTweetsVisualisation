@@ -22,14 +22,13 @@ const routes = {
 const state = {
   tweets: [],
   lastPageNumber: 1, // will be updated with each api request
-  loading: true, // TODO: Implement loader on fetching
   profilePictureUrl: '',
   bannerUrl: ''
 }
 
 // getters
 const getters = {
-  tweets: state => state.all,
+  tweets: state => state.tweets,
   profilePictureUrl: state => state.profilePictureUrl,
   bannerUrl: state => state.bannerUrl
 }
@@ -41,8 +40,7 @@ const actions = {
 
     req.get(`${routes.fetchPage}/${currentPageNumber}`)
       .then(response => {
-        const { tweets } = response.data
-        commit(types.APPEND_TWEETS_PAGE, { tweets })
+        commit(types.APPEND_TWEETS_PAGE, response.data.tweets)
         commit(types.INCREMENT_PAGE_COUNTER)
       })
       .catch(err => console.log('boom', err))
@@ -61,7 +59,7 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.APPEND_TWEETS_PAGE] (state, { fetchedTweets }) {
+  [types.APPEND_TWEETS_PAGE] (state, fetchedTweets) {
     state.tweets = state.tweets.concat(fetchedTweets)
   },
   [types.INCREMENT_PAGE_COUNTER] (state) {
@@ -70,8 +68,6 @@ const mutations = {
   [types.UPDATE_PROFILE] (state, profile) {
     state.profilePictureUrl = profile.imageUrl
     state.bannerUrl = profile.bannerUrl
-    console.log('commited state')
-    console.log('state', state)
   }
 }
 

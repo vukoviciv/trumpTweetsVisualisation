@@ -14,70 +14,70 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      tweet: {
-        type: Object,
-        required: true,
-      }
-    },
-
-    computed: {
-      createdAt() {
-        let parsedTime = new Date(Date.parse(this.tweet.created_at));
-        return `${parsedTime.toLocaleTimeString()}, ${parsedTime.toDateString()}`;
-      }
+export default {
+  props: {
+    tweet: {
+      type: Object,
+      required: true
     }
-  };
+  },
+
+  computed: {
+    createdAt() {
+      let parsedTime = new Date(Date.parse(this.tweet.created_at));
+      return `${parsedTime.toLocaleTimeString()}, ${parsedTime.toDateString()}`;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import 'assets/stylesheets/variables.scss';
-  @import 'assets/stylesheets/breakPoints.scss';
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/breakPoints.scss';
 
-  @mixin transition-ease-out () {
-    -webkit-transition: all .2s ease-out;
-    -moz-transition: all .2s ease-out;
-    -ms-transition: all .2s ease-out;
-    -o-transition: all .2s ease-out;
-    transition: all .2s ease-out;
-  }
+@mixin transition-ease-out() {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
 
-  .tweet {
-    padding: .8rem;
-    line-height: 1.5;
+.tweet {
+  padding: 0.8rem;
+  line-height: 1.5;
 
-    &:hover {
-      background-color: #f9f9f9;
-      @include transition-ease-out();
-      @include for-desktop-up() {
-        transform: scale(1.2);
-        cursor: pointer;
-      }
-    }
-
-    .text-wrapper {
-      cursor: text;
-    }
-
-    .time-count-wrapper {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-    }
-
-    .time {
-      font-size: .8rem;
-      color: $light-grey;
-    }
-
-    .favorite-count {
-      float: right;
-      color: $light-grey;
-    }
-
-    .favorite-count .fa {
-      color: red;
+  &:hover {
+    background-color: #f9f9f9;
+    @include transition-ease-out();
+    @include for-desktop-up() {
+      transform: scale(1.2);
+      cursor: pointer;
     }
   }
+
+  .text-wrapper {
+    cursor: text;
+  }
+
+  .time-count-wrapper {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .time {
+    font-size: 0.8rem;
+    color: $light-grey;
+  }
+
+  .favorite-count {
+    float: right;
+    color: $light-grey;
+  }
+
+  .favorite-count .fa {
+    color: red;
+  }
+}
 </style>
