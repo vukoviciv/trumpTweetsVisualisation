@@ -20,7 +20,7 @@ const routes = {
 
 // initial state
 const state = {
-  all: [],
+  tweets: [],
   lastPageNumber: 1, // will be updated with each api request
   loading: true, // TODO: Implement loader on fetching
   profilePictureUrl: '',
@@ -29,11 +29,9 @@ const state = {
 
 // getters
 const getters = {
-  allTweets: state => state.all,
-  count: state => state.count,
+  tweets: state => state.all,
   profilePictureUrl: state => state.profilePictureUrl,
-  bannerUrl: state => state.bannerUrl,
-  loading: state => this.profilePictureUrl && this.allTweets
+  bannerUrl: state => state.bannerUrl
 }
 
 // actions
@@ -63,8 +61,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.APPEND_TWEETS_PAGE] (state, { tweets }) {
-    state.all = state.all.concat(tweets)
+  [types.APPEND_TWEETS_PAGE] (state, { fetchedTweets }) {
+    state.tweets = state.tweets.concat(fetchedTweets)
   },
   [types.INCREMENT_PAGE_COUNTER] (state) {
     state.lastPageNumber += 1

@@ -7,7 +7,9 @@
       :profilePictureUrl='profilePictureUrl'
       :bannerUrl='bannerUrl'>
     </tweets-header>
-    <tweets-list></tweets-list>
+    <tweets-list
+      :tweets='tweets'>
+    </tweets-list>
   </div>
 </template>
 
@@ -28,17 +30,21 @@ export default {
   computed: {
     ...mapGetters([
       'profilePictureUrl',
-      'bannerUrl'
+      'bannerUrl',
+      'tweets'
     ])
   },
 
-  methods: mapActions([
-      'getProfileAndBackgroundPicture'
-  ]),
+  methods: {
+    ...mapActions([
+      'getProfileAndBackgroundPicture',
+      'appendTweetsPage'
+    ])
+  },
 
   created() {
-    console.log('TWEETS INDEX CREATED')
     this.getProfileAndBackgroundPicture()
+    this.appendTweetsPage()
   },
 
   updated() {

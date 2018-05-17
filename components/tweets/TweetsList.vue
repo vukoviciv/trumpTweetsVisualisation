@@ -17,17 +17,24 @@
   import Tweet from './Tweet.vue';
 
   export default {
-    computed: mapGetters({
-      tweets: 'allTweets'
-    }),
-
-    methods: mapActions([
-      'appendTweetsPage'
-    ]),
-
-    mounted() {
-      this.appendTweetsPage();
+    props: {
+      tweets: {
+        type: Array,
+        required: true
+      }
     },
+    // },
+    // computed: mapGetters({
+    //   tweets: 'allTweets'
+    // }),
+
+    // methods: mapActions([
+    //   'appendTweetsPage'
+    // ]),
+
+    // mounted() {
+    //   this.appendTweetsPage();
+    // },
 
     components: { Tweet },
   };
