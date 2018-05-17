@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from './components/main/Home'
-import TweetsList from './components/tweets/TweetsList'
+import TweetsIndex from './components/tweets/TweetsIndex'
 import Graph from './components/graphs/Graph'
 
 Vue.use(VueRouter)
@@ -18,7 +18,7 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { name: routeNames.HOME, path: '/', component: Home },
-    { name: routeNames.TWEETS, path: '/tweets', component: TweetsList },
+    { name: routeNames.TWEETS, path: '/tweets', component: TweetsIndex },
     { name: routeNames.GRAPHS, path: '/graph', component: Graph },
   ]
 })

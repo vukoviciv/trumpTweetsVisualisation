@@ -8,20 +8,27 @@
         <i class="fa fa-heart-o"></i>
         <span>{{ tweet.favorite_count }}</span>
       </span>
-      <span class="time">{{ tweet.created_at }}</span>
+      <span class="time">{{ createdAt }}</span>
     </span>
   </li>
 </template>
 
 <script>
-export default {
-  props: {
-    tweet: {
-      type: Object,
-      required: true,
+  export default {
+    props: {
+      tweet: {
+        type: Object,
+        required: true,
+      }
+    },
+
+    computed: {
+      createdAt() {
+        let parsedTime = new Date(Date.parse(this.tweet.created_at));
+        return `${parsedTime.toLocaleTimeString()}, ${parsedTime.toDateString()}`;
+      }
     }
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
