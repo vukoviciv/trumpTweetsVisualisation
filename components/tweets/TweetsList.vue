@@ -8,8 +8,6 @@
         :tweet='tweet'>
       </tweet>
     </ol>
-
-    <button @click='appendTweetsPage'>Append new page</button>
   </div>
 </template>
 
@@ -18,6 +16,10 @@
   import Tweet from './Tweet.vue';
 
   export default {
+    data() {
+      return { bottom: false }
+    },
+
     computed: {
       ...mapGetters(['tweets']),
       loading() {
@@ -26,7 +28,29 @@
     },
 
     methods: {
-      ...mapActions(['appendTweetsPage'])
+      ...mapActions(['appendTweetsPage']),
+      bottomVisible() {
+        const scrollY = window.scrollY
+        const visible = document.documentElement.clientHeight
+        const pageHeight = document.documentElement.scrollHeight
+        console.log('scrollY', scrollY, 'visible', visible, 'pageHeight', pageHeight)
+        const bottomOfPage = visible + scrollY >= pageHeight
+        console.log('bottomOfPage', bottomOfPage)
+
+        return bottomOfPage || pageHeight < visible
+      }
+    },
+
+    watch: {
+      bottom(bottom) {
+        if(bottom) this.appendTweetsPage()
+      }
+    },
+
+    created() {
+        window.addEventListener('scroll', () => {
+        this.bottom = this.bottomVisible()
+      })
     },
 
     components: { Tweet },

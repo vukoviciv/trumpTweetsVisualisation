@@ -22,8 +22,8 @@ const routes = {
 const state = {
   tweets: [],
   lastPageNumber: 1, // will be updated with each api request
-  profilePictureUrl: undefined,
-  bannerUrl: undefined
+  profilePictureUrl: '',
+  bannerUrl: ''
 }
 
 // getters

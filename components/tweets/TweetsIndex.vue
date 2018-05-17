@@ -20,7 +20,7 @@ export default {
     ])
   },
 
-  mounted() {
+  created() {
     this.getProfileAndBackgroundPicture()
     this.appendTweetsPage()
   },
