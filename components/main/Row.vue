@@ -1,10 +1,10 @@
 <template>
   <div class="row">
     <div class="large-text-container">
-      <h1> {{ title }} </h1>
+      <h1> {{ row.title }} </h1>
     </div>
     <div class="large-button-container">
-      <router-link :to="{ name: routeName }">{{ linkText }}</router-link>
+      <router-link :to="{ name: row.routeName }">{{ row.linkText }}</router-link>
     </div>
   </div>
 </template>
@@ -12,16 +12,8 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    linkText: {
-      type: String,
-      required: true,
-    },
-    routeName: {
-      type: String,
+    row: {
+      type: Object,
       required: true,
     }
   }
@@ -48,8 +40,6 @@ export default {
   }
 
   a {
-    // display: flex;
-    // align-items: center;
     background-color: black;
     color: white;
     text-decoration: none;

@@ -3,11 +3,13 @@
 </template>
 
 <script>
-export default {}
+  import Home from './main/Home.vue';
+
+  export default {
+    components: { Home }
+  }
 </script>
 
 <style lang="scss">
-@import 'assets/stylesheets/main.scss'
-
+  @import 'assets/stylesheets/main.scss';
 </style>
-
