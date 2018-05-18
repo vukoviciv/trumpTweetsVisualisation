@@ -33,10 +33,7 @@
         const scrollY = window.scrollY
         const visible = document.documentElement.clientHeight
         const pageHeight = document.documentElement.scrollHeight
-        console.log('scrollY', scrollY, 'visible', visible, 'pageHeight', pageHeight)
         const bottomOfPage = visible + scrollY >= pageHeight
-        console.log('bottomOfPage', bottomOfPage)
-
         return bottomOfPage || pageHeight < visible
       }
     },

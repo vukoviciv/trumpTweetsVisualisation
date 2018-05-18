@@ -1,13 +1,15 @@
 <template>
   <li
     class='tweet'
-    :class='{ loading: loading }'>
+    :class='{ loading: loading }'
+    @mouseover='mouseOver'
+    @mouseout='mouseOut'>
     <span class='text-wrapper'>
       <span class='text'>{{ tweet.full_text }}</span>
     </span>
     <span class='time-count-wrapper'>
       <span class='favorite-count'>
-        <i class='fa fa-heart-o'></i>
+        <heart :pulse='pulse'></heart>
         <span>{{ tweet.favorite_count }}</span>
       </span>
       <span class='time'>{{ createdAt }}</span>
@@ -16,7 +18,13 @@
 </template>
 
 <script>
+import Heart from '../common/Heart.vue'
+
 export default {
+  data() {
+      return { pulse: false }
+  },
+
   props: {
     tweet: {
       type: Object,
@@ -32,8 +40,15 @@ export default {
       const parsedTime = new Date(Date.parse(this.tweet.created_at));
       return `${parsedTime.toLocaleTimeString()}, ${parsedTime.toDateString()}`;
     }
-  }
-};
+  },
+
+  methods: {
+    mouseOver() { this.pulse = true },
+    mouseOut() { this.pulse = false }
+  },
+
+  components: { Heart }
+}
 </script>
 
 <style lang='scss' scoped>
