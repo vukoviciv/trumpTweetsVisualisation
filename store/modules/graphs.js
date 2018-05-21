@@ -18,7 +18,7 @@ const getters = {
 
 // actions
 const actions = {
-  createGraph ({ commit }) {
+  fetchGraph ({ commit }) {
     req.get(`${routes.fetchGraphData}`)
       .then(response => {
         commit(types.CREATE_GRAPH, response.data)

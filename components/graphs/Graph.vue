@@ -1,24 +1,21 @@
 <template>
-  <div class='graph-container'>
+  <div class='right-container'>
     <svg
       id='graph-container'
-      preserveAspectRatio='xMinYMin meet'>
+      preserveAspectRatio='xMaxYMax meet'>
     </svg>
   </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
-import { mapGetters } from 'vuex'
-import Graph from './Graph.vue'
 
 // Root component
 export default {
-  computed: {
-    ...mapGetters(['words']),
-
-    force() {
-
+  props: {
+    words: {
+      type: Array,
+      required: true
     }
   },
 
@@ -31,16 +28,13 @@ export default {
   methods: {
     buildGraph () {
       const nodes = this.words
-      const windowDimensions = this.getWindowInnerDimension();
+      const windowDimensions = this.getDimensions();
       const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
       const forceY = d3.forceY(windowDimensions.height / 2).strength(0.09);
-      const unitConstant = 0.4;
+      const unitConstant = windowDimensions.width * 0.00025; // Magic number
       const color = d3.scaleOrdinal(d3.schemePaired);
 
-      const d3graphContainer = d3.select('#graph-container');
-      d3graphContainer.selectAll('*').remove();
-
-      d3graphContainer
+      const d3graphContainer = d3.select('#graph-container')
         .attr('viewBox', `0 0 ${windowDimensions.width} ${windowDimensions.height}`);
 
       const circlesContainer = d3graphContainer
@@ -82,14 +76,13 @@ export default {
         .nodes(nodes)
         .on('tick', () => this.ticked(circlesContainer, textContainer, unitConstant));
 
-      // createLegend(words, color);
       // this.showOrHideResetDefaultButton();
     },
 
-    getWindowInnerDimension () {
+    getDimensions () {
       return {
         width: window.innerWidth,
-        height: window.innerHeight,
+        height: window.innerHeight
       }
     },
 
@@ -130,20 +123,23 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.graph-container {
-  display: inline-block;
-  position: relative;
+<style lang="scss">
+.right-container {
   width: 100%;
-  padding-bottom: 100%; /* aspect ratio */
-  vertical-align: top;
-  overflow: hidden;
+  // display: inline-block;
+  // // padding-bottom: 100%; /* aspect ratio */
+  // vertical-align: top;
+  // overflow: hidden;
 }
-
 svg#graph-container {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  // display: inline-block;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+
+  g.text-container text {
+    fill: white;
+    font-weight: bold;
+  }
 }
 </style>
