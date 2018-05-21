@@ -1,18 +1,26 @@
 <template>
-  <div>
-    <svg id='graph-container'></svg>
+  <div class='graph-container'>
+    <svg
+      id='graph-container'
+      preserveAspectRatio='xMinYMin meet'>
+    </svg>
   </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
-import { mapActions, mapGetters } from 'vuex'
+import throttle from 'lodash/throttle'
+import { mapGetters } from 'vuex'
 import Graph from './Graph.vue'
 
 // Root component
 export default {
   computed: {
-    ...mapGetters(['words'])
+    ...mapGetters(['words']),
+
+    force() {
+
+    }
   },
 
   watch: {
@@ -21,26 +29,20 @@ export default {
     }
   },
 
-  mounted() {
-    this.createGraph()
-  },
-
   methods: {
-    ...mapActions(['createGraph']),
-
     buildGraph () {
       const nodes = this.words
       const windowDimensions = this.getWindowInnerDimension();
       const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
       const forceY = d3.forceY(windowDimensions.height / 2).strength(0.09);
-      const unitConstant = windowDimensions.width * 0.0004;
+      const unitConstant = 0.4;
       const color = d3.scaleOrdinal(d3.schemePaired);
 
       const d3graphContainer = d3.select('#graph-container');
+      d3graphContainer.selectAll('*').remove();
 
       d3graphContainer
-        .attr('width', windowDimensions.width)
-        .attr('height', windowDimensions.height);
+        .attr('viewBox', `0 0 ${windowDimensions.width} ${windowDimensions.height}`);
 
       const circlesContainer = d3graphContainer
         .append('g')
@@ -87,8 +89,8 @@ export default {
 
     getWindowInnerDimension () {
       return {
-        width: window.innerWidth - 310,
-        height: window.innerHeight - 10,
+        width: window.innerWidth,
+        height: window.innerHeight,
       }
     },
 
@@ -128,3 +130,21 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.graph-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+
+svg#graph-container {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>

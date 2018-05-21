@@ -12,6 +12,14 @@ import Graph from './Graph.vue'
 
 // Root component
 export default {
+  methods: {
+    ...mapActions(['createGraph']),
+  },
+
+  mounted() {
+    this.createGraph()
+  },
+
   components: { Graph }
 }
 </script>
