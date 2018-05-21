@@ -9,7 +9,6 @@
 
 <script>
 import * as d3 from 'd3'
-import throttle from 'lodash/throttle'
 import { mapGetters } from 'vuex'
 import Graph from './Graph.vue'
 
