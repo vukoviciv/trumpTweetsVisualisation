@@ -24,18 +24,35 @@ export default {
       this.buildGraph()
     }
   },
+  mounted() {
+    window.addEventListener('resize', this.resize)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resize)
+  },
 
   methods: {
+    resize() {
+      const { width, ratioWtoH } = this.getDimensions()
+
+      const d3graphContainer = d3.select('#graph-container')
+        .attr('width', width )
+        .attr('height', Math.round(width / ratioWtoH));
+    },
+
     buildGraph () {
       const nodes = this.words
-      const windowDimensions = this.getDimensions();
-      const forceX = d3.forceX(windowDimensions.width / 2).strength(0.09);
-      const forceY = d3.forceY(windowDimensions.height / 2).strength(0.09);
-      const unitConstant = windowDimensions.width * 0.00025; // Magic number
+      const { width, height, ratioWtoH } = this.getDimensions()
+      const forceX = d3.forceX(width / 2).strength(0.09);
+      const forceY = d3.forceY(height/ 2).strength(0.09);
+      const unitConstant = width * 0.0004; // Magic number
       const color = d3.scaleOrdinal(d3.schemePaired);
 
       const d3graphContainer = d3.select('#graph-container')
-        .attr('viewBox', `0 0 ${windowDimensions.width} ${windowDimensions.height}`);
+        .attr('width', width )
+        .attr('height', Math.round(width / ratioWtoH))
+        .attr('viewBox', `0 0 ${width} ${height}`);
 
       const circlesContainer = d3graphContainer
         .append('g')
@@ -80,10 +97,9 @@ export default {
     },
 
     getDimensions () {
-      return {
-        width: window.innerWidth,
-        height: window.innerHeight
-      }
+      const width = window.innerWidth - (window.innerWidth / 1.8)
+      const height = window.innerHeight - (window.innerHeight / 2.8)
+      return { width, height, ratioWtoH : width/height }
     },
 
     getRadius (d, unitConstant) {
@@ -103,22 +119,6 @@ export default {
         .attr('x', d => d.x)
         .attr('y', d => d.y + (this.getFontSizeInUnits(d, unitConstant) / 3));
     },
-
-    /* Graph data helpers */
-
-    customDataExists () {
-      return window.sessionStorage.getItem('graphData');
-    },
-
-    getDefaultData () {
-      return JSON.parse(window.sessionStorage.getItem('defaultData'))
-    },
-
-    // showOrHideResetDefaultButton () {
-    //   const resetButton = document.getElementById('reset-to-default');
-    //   if (customDataExists()) resetButton.classList.remove('hidden');
-    //   else resetButton.classList.add('hidden');
-    // }
   }
 }
 </script>

@@ -1,13 +1,18 @@
 <template>
-  <v-container grid-list-md text-xs-center>
-    <v-layout row wrap class='main-graph-container'>
-      <v-flex md2 class='left-container'>
+  <v-container grid-list-md align-top>
+    <v-layout row justify-content class='main-graph-container'>
+      <v-flex lg4 md1 class='left-container'>
         <graph-legend :words='words'></graph-legend>
+        <menu showCollapsedMenu='true'></menu>
       </v-flex>
-      <v-flex md10 class='right-container'>
+      <v-flex lg6 class='right-container'>
         <graph :words='words'></graph>
       </v-flex>
-      <modal dialog='dialog'></modal>
+    </v-layout>
+    <v-layout>
+      <v-flex sm12 md3>
+        <modal dialog='dialog'></modal>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -18,13 +23,15 @@ import { mapActions, mapGetters } from 'vuex'
 import Graph from './Graph.vue'
 import GraphLegend from './GraphLegend.vue'
 import Modal from '../common/Modal.vue'
+import Menu from '../common/Menu.vue'
 
 // Root component
 export default {
   name: 'graph-index',
   data() {
     return {
-      dialog: false
+      dialog: false,
+      showCollapsedMenu: false
     }
   },
 
@@ -51,20 +58,9 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
-.main-graph-container {
-  display: flex;
-  align-items: stretch;
-  height: 100%;
-}
-
-.right-container {
-  width: 100%;
-}
-
-.left-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+<style lang="scss" scoped>
+.footer {
+  height: 50px;
 }
 </style>
+>
