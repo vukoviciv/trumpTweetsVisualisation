@@ -1,13 +1,16 @@
 <template>
-  <div class='left-container'>
-    <svg id='legend-container'></svg>
-  </div>
+  <svg
+    id='legend-container'
+    >
+  </svg>
 </template>
 
 <script>
 import * as d3 from 'd3'
 
 export default {
+  name: 'graph-legend',
+
   props: {
     words: {
       type: Array,
@@ -26,6 +29,10 @@ export default {
       const nodes = this.words
       const d3legendContainer = d3.select('#legend-container');
       const color = d3.scaleOrdinal(d3.schemePaired);
+      const rectangleSide = 20;
+
+      // d3legendContainer
+      //   .attr('viewBox', `0 0 auto ${rectangleSide * nodes.length}`);
 
       const rectanglesContainer = d3legendContainer
         .append('g')
@@ -40,8 +47,8 @@ export default {
         .data(nodes)
         .enter().append('rect')
         .style('fill', (d, i) => color(i))
-        .attr('width', 20)
-        .attr('height', 20)
+        .attr('width', rectangleSide)
+        .attr('height', rectangleSide)
         .attr('x', 50)
         .attr('y', (d, i) => 30 * (i + 2));
 
@@ -60,11 +67,5 @@ export default {
 <style lang="scss">
 svg#legend-container{
   height: 100%;
-
-  g.legend-container {
-    text {
-      text-transform: lowercase;
-    }
-  }
 }
 </style>

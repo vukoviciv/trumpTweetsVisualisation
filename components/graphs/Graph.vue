@@ -1,10 +1,8 @@
 <template>
-  <div class='right-container'>
     <svg
       id='graph-container'
       preserveAspectRatio='xMaxYMax meet'>
     </svg>
-  </div>
 </template>
 
 <script>
@@ -12,6 +10,8 @@ import * as d3 from 'd3'
 
 // Root component
 export default {
+  name: 'graph',
+
   props: {
     words: {
       type: Array,
@@ -124,19 +124,7 @@ export default {
 </script>
 
 <style lang="scss">
-.right-container {
-  width: 100%;
-  // display: inline-block;
-  // // padding-bottom: 100%; /* aspect ratio */
-  // vertical-align: top;
-  // overflow: hidden;
-}
 svg#graph-container {
-  // display: inline-block;
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-
   g.text-container text {
     fill: white;
     font-weight: bold;

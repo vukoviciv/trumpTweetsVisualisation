@@ -46,7 +46,7 @@ export default {
 
     &:hover {
       cursor: pointer;
-      background-color: white;
+      background-color: transparent;
       color: black;
     }
   }
