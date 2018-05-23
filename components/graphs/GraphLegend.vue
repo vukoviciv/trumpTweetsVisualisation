@@ -1,5 +1,6 @@
 <template>
   <svg
+    v-show=!showCollapsedMenu
     id='legend-container'
     preserveAspectRatio='xMaxYMax meet'>
   </svg>
@@ -14,6 +15,10 @@ export default {
   props: {
     words: {
       type: Array,
+      required: true
+    },
+    showCollapsedMenu: {
+      type: Boolean,
       required: true
     }
   },

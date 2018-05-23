@@ -1,9 +1,15 @@
 <template>
   <v-container grid-list-md align-top>
+    <custom-menu
+      :showCollapsedMenu=showCollapsedMenu
+      :words='words'>
+    </custom-menu>
     <v-layout row justify-content class='main-graph-container'>
       <v-flex lg4 md1 class='left-container'>
-        <graph-legend :words='words'></graph-legend>
-        <menu showCollapsedMenu='true'></menu>
+        <graph-legend
+          :showCollapsedMenu=showCollapsedMenu
+          :words='words'>
+        </graph-legend>
       </v-flex>
       <v-flex lg6 class='right-container'>
         <graph :words='words'></graph>
@@ -23,7 +29,7 @@ import { mapActions, mapGetters } from 'vuex'
 import Graph from './Graph.vue'
 import GraphLegend from './GraphLegend.vue'
 import Modal from '../common/Modal.vue'
-import Menu from '../common/Menu.vue'
+import CustomMenu from '../common/Menu.vue'
 
 // Root component
 export default {
@@ -31,7 +37,7 @@ export default {
   data() {
     return {
       dialog: false,
-      showCollapsedMenu: false
+      showCollapsedMenu: true
     }
   },
 
@@ -50,17 +56,13 @@ export default {
     this.fetchGraph()
   },
 
+  // TODO: here all resize events for graph, legend and legend menu?
+
   components: {
     GraphLegend,
     Graph,
     Modal,
+    CustomMenu
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.footer {
-  height: 50px;
-}
-</style>
->
