@@ -8,12 +8,12 @@ const routes = {
 
 // initial state
 const state = {
-  words: [],
+  wordsWithCount: [],
 }
 
 // getters
 const getters = {
-  words: state => state.words,
+  wordsWithCount: state => state.wordsWithCount,
 }
 
 // actions
@@ -29,8 +29,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.CREATE_GRAPH] (state, words) {
-    state.words = words
+  [types.CREATE_GRAPH] (state, wordsWithCount) {
+    state.wordsWithCount = wordsWithCount
   }
 }
 

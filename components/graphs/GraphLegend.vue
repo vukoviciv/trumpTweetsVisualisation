@@ -1,8 +1,7 @@
 <template>
   <svg
-    v-show=!showCollapsedMenu
     id='legend-container'
-    preserveAspectRatio='xMaxYMax meet'>
+    preserveAspectRatio='xMidYMid meet'>
   </svg>
 </template>
 
@@ -15,10 +14,6 @@ export default {
   props: {
     words: {
       type: Array,
-      required: true
-    },
-    showCollapsedMenu: {
-      type: Boolean,
       required: true
     }
   },
@@ -38,23 +33,22 @@ export default {
   },
 
   methods: {
-    // TODO: under 960px swith to dropdown legend
+
     buildLegend() {
       const nodes = this.words
-      const d3legendContainer = d3.select('#legend-container');
+      const d3legendContainer = d3.select('#legend-container')
       const { width, height, ratioWtoH } = this.getDimensions()
 
-      const color = d3.scaleOrdinal(d3.schemePaired);
-      const rectangleSide = 20;
+      const rectangleSide = 20
 
       d3legendContainer
         .attr('width', width )
         .attr('height', Math.round(width / ratioWtoH))
-        .attr('viewBox', `0 0 ${width} ${height}`);
+        .attr('viewBox', `0 0 ${width} ${height}`)
 
       const rectanglesContainer = d3legendContainer
         .append('g')
-        .attr('class', 'rectangles-container');
+        .attr('class', 'rectangles-container')
 
       const textContainer = d3legendContainer
         .append('g')
@@ -64,19 +58,19 @@ export default {
         .selectAll('rect')
         .data(nodes)
         .enter().append('rect')
-        .style('fill', (d, i) => color(i))
+        .style('fill', (d, i) => d.color)
         .attr('width', rectangleSide)
         .attr('height', rectangleSide)
         .attr('x', 50)
-        .attr('y', (d, i) => 30 * (i + 2));
+        .attr('y', (d, i) => 30 * (i + 2))
 
       const texts = textContainer
         .selectAll('text')
         .data(nodes)
         .enter().append('text')
-        .text(d => d.word)
+        .text(d => d.text)
         .attr('x', 80)
-        .attr('y', (d, i) => ((30 * (i + 2)) + 15));
+        .attr('y', (d, i) => ((30 * (i + 2)) + 15))
     },
 
     resize() {
@@ -84,13 +78,13 @@ export default {
 
       const d3graphContainer = d3.select('#legend-container')
         .attr('width', width )
-        .attr('height', Math.round(width / ratioWtoH));
+        .attr('height', Math.round(width / ratioWtoH))
     },
 
     getDimensions() {
       const width = window.innerWidth / 5
       // Include rectangle size and diff between the two of them
-      const sizeConstant = 50;
+      const sizeConstant = 40
       const height = this.words.length * sizeConstant
 
       return { width, height, ratioWtoH : width/height }

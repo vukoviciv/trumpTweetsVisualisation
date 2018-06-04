@@ -38,42 +38,43 @@ export default {
 
       const d3graphContainer = d3.select('#graph-container')
         .attr('width', width )
-        .attr('height', Math.round(width / ratioWtoH));
+        .attr('height', Math.round(width / ratioWtoH))
     },
 
     buildGraph () {
       const nodes = this.words
+
       const { width, height, ratioWtoH } = this.getDimensions()
-      const forceX = d3.forceX(width / 2).strength(0.09);
-      const forceY = d3.forceY(height/ 2).strength(0.09);
-      const unitConstant = width * 0.0004; // Magic number
-      const color = d3.scaleOrdinal(d3.schemePaired);
+      const forceX = d3.forceX(width / 2).strength(0.09)
+      const forceY = d3.forceY(height/ 2).strength(0.09)
+      const unitConstant = width * 0.0004  // Magic number
+      console.log(unitConstant)
 
       const d3graphContainer = d3.select('#graph-container')
         .attr('width', width )
         .attr('height', Math.round(width / ratioWtoH))
-        .attr('viewBox', `0 0 ${width} ${height}`);
+        .attr('viewBox', `0 0 ${width} ${height}`)
 
       const circlesContainer = d3graphContainer
         .append('g')
-        .attr('class', 'circles-container');
+        .attr('class', 'circles-container')
 
       const textContainer = d3graphContainer
         .append('g')
-        .attr('class', 'text-container');
+        .attr('class', 'text-container')
 
       const circles = circlesContainer
         .selectAll('circle')
         .data(nodes.filter(node => node.count > 0))
         .enter()
-        .append('circle');
+        .append('circle')
 
       // Circles attributes
       circles
         .attr('r', d => this.getRadius(d, unitConstant))
-        .style('fill', (d, i) => color(i))
+        .style('fill', (d, i) => d.color)
         .append('title')
-        .text(d => `${d.word} (${d.count})`);
+        .text(d => `${d.text} (${d.count})`)
 
       // Text
       textContainer
@@ -82,7 +83,7 @@ export default {
         .enter().append('text')
         .attr('text-anchor', 'middle')
         .style('font-size', d => this.getFontSizeInUnits(d, unitConstant))
-        .text(d => d.word);
+        .text(d => d.text)
 
       // Force
       d3.forceSimulation()
@@ -91,14 +92,14 @@ export default {
         .force('y', forceY)
         .force('collide', d3.forceCollide().radius(d => this.getRadius(d, unitConstant)).iterations(1))
         .nodes(nodes)
-        .on('tick', () => this.ticked(circlesContainer, textContainer, unitConstant));
+        .on('tick', () => this.ticked(circlesContainer, textContainer, unitConstant))
 
-      // this.showOrHideResetDefaultButton();
+      // this.showOrHideResetDefaultButton()
     },
 
     getDimensions () {
-      const width = window.innerWidth - (window.innerWidth / 1.8)
-      const height = window.innerHeight - (window.innerHeight / 2.8)
+      const width = window.innerWidth - (window.innerWidth / 2)
+      const height = window.innerHeight - (window.innerHeight / 5)
       return { width, height, ratioWtoH : width/height }
     },
 
@@ -113,11 +114,11 @@ export default {
     ticked (circlesContainer, textContainer, unitConstant) {
       circlesContainer.selectAll('circle')
         .attr('cx', d => d.x)
-        .attr('cy', d => d.y);
+        .attr('cy', d => d.y)
 
       textContainer.selectAll('text')
         .attr('x', d => d.x)
-        .attr('y', d => d.y + (this.getFontSizeInUnits(d, unitConstant) / 3));
+        .attr('y', d => d.y + (this.getFontSizeInUnits(d, unitConstant) / 3))
     },
   }
 }
@@ -126,7 +127,7 @@ export default {
 <style lang="scss">
 svg#graph-container {
   g.text-container text {
-    fill: white;
+    fill: white ;
     font-weight: bold;
   }
 }
